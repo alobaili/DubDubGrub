@@ -16,6 +16,11 @@
 		4B7E09D929C8F70C00377AF4 /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E09D829C8F70C00377AF4 /* LocationListView.swift */; };
 		4B7E09DB29C8F71C00377AF4 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E09DA29C8F71C00377AF4 /* ProfileView.swift */; };
 		4B7E09E429C9E93800377AF4 /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E09E329C9E93800377AF4 /* LocationDetailView.swift */; };
+		4B7E09E629CA327B00377AF4 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E09E529CA327B00377AF4 /* LocationCell.swift */; };
+		4B7E09E829CA32A800377AF4 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E09E729CA32A800377AF4 /* AvatarView.swift */; };
+		4B7E09EA29CA34E400377AF4 /* CustomModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E09E929CA34E400377AF4 /* CustomModifier.swift */; };
+		4B7E09EC29CA351700377AF4 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E09EB29CA351700377AF4 /* View+.swift */; };
+		4B7E09EE29CA35F300377AF4 /* DDGButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E09ED29CA35F300377AF4 /* DDGButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +35,11 @@
 		4B7E09D829C8F70C00377AF4 /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
 		4B7E09DA29C8F71C00377AF4 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		4B7E09E329C9E93800377AF4 /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
+		4B7E09E529CA327B00377AF4 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
+		4B7E09E729CA32A800377AF4 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		4B7E09E929CA34E400377AF4 /* CustomModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModifier.swift; sourceTree = "<group>"; };
+		4B7E09EB29CA351700377AF4 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		4B7E09ED29CA35F300377AF4 /* DDGButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDGButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,16 +72,12 @@
 		4B7E09C229C8F37B00377AF4 /* DubDubGrub */ = {
 			isa = PBXGroup;
 			children = (
+				4B7E09EF29CA371600377AF4 /* Extensions */,
+				4B7E09F029CA372C00377AF4 /* Views */,
 				4B7E09D129C8F3CD00377AF4 /* DubDubGrub.entitlements */,
 				4B7E09C329C8F37B00377AF4 /* DubDubGrubApp.swift */,
-				4B7E09D429C8F69A00377AF4 /* AppTabView.swift */,
-				4B7E09D629C8F6F100377AF4 /* LocationMapView.swift */,
-				4B7E09D829C8F70C00377AF4 /* LocationListView.swift */,
-				4B7E09E329C9E93800377AF4 /* LocationDetailView.swift */,
-				4B7E09DA29C8F71C00377AF4 /* ProfileView.swift */,
 				4B7E09C729C8F37C00377AF4 /* Assets.xcassets */,
 				4B7E09C929C8F37C00377AF4 /* Preview Content */,
-				4B7E09D229C8F62000377AF4 /* Color+.swift */,
 			);
 			path = DubDubGrub;
 			sourceTree = "<group>";
@@ -82,6 +88,55 @@
 				4B7E09CA29C8F37C00377AF4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4B7E09EF29CA371600377AF4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4B7E09EB29CA351700377AF4 /* View+.swift */,
+				4B7E09D229C8F62000377AF4 /* Color+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4B7E09F029CA372C00377AF4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4B7E09E929CA34E400377AF4 /* CustomModifier.swift */,
+				4B7E09F329CA376500377AF4 /* CustomViews */,
+				4B7E09F229CA375900377AF4 /* Cells */,
+				4B7E09F129CA373300377AF4 /* Screens */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4B7E09F129CA373300377AF4 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				4B7E09D429C8F69A00377AF4 /* AppTabView.swift */,
+				4B7E09D629C8F6F100377AF4 /* LocationMapView.swift */,
+				4B7E09D829C8F70C00377AF4 /* LocationListView.swift */,
+				4B7E09E329C9E93800377AF4 /* LocationDetailView.swift */,
+				4B7E09DA29C8F71C00377AF4 /* ProfileView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		4B7E09F229CA375900377AF4 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4B7E09E529CA327B00377AF4 /* LocationCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		4B7E09F329CA376500377AF4 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				4B7E09E729CA32A800377AF4 /* AvatarView.swift */,
+				4B7E09ED29CA35F300377AF4 /* DDGButton.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,11 +210,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B7E09D329C8F62000377AF4 /* Color+.swift in Sources */,
+				4B7E09EA29CA34E400377AF4 /* CustomModifier.swift in Sources */,
 				4B7E09D729C8F6F100377AF4 /* LocationMapView.swift in Sources */,
 				4B7E09D929C8F70C00377AF4 /* LocationListView.swift in Sources */,
 				4B7E09E429C9E93800377AF4 /* LocationDetailView.swift in Sources */,
+				4B7E09EC29CA351700377AF4 /* View+.swift in Sources */,
 				4B7E09D529C8F69A00377AF4 /* AppTabView.swift in Sources */,
 				4B7E09DB29C8F71C00377AF4 /* ProfileView.swift in Sources */,
+				4B7E09E629CA327B00377AF4 /* LocationCell.swift in Sources */,
+				4B7E09EE29CA35F300377AF4 /* DDGButton.swift in Sources */,
+				4B7E09E829CA32A800377AF4 /* AvatarView.swift in Sources */,
 				4B7E09C429C8F37B00377AF4 /* DubDubGrubApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
