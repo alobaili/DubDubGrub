@@ -27,6 +27,12 @@ struct LocationMapView: View {
                 Spacer()
             }
         }
+        .sheet(
+            isPresented: $viewModel.isShowingOnboardView,
+            onDismiss: viewModel.checkIfLocationServicesIsEnabled
+        ) {
+            OnboardView(isShowingOnboardView: $viewModel.isShowingOnboardView)
+        }
         .alert(item: $viewModel.alertItem) { alertItem in
             Alert(
                 title: alertItem.title,
@@ -35,7 +41,7 @@ struct LocationMapView: View {
             )
         }
         .onAppear {
-            viewModel.checkIfLocationServicesIsEnabled()
+            viewModel.runStartupChecks()
 
             if locationManager.locations.isEmpty {
                 viewModel.getLocations(for: locationManager)
