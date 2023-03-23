@@ -30,6 +30,7 @@
 		4BDD126429CCB5B1001A0218 /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD126329CCB5B1001A0218 /* AlertItem.swift */; };
 		4BDD126729CCB94E001A0218 /* LocationMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD126629CCB94E001A0218 /* LocationMapViewModel.swift */; };
 		4BDD126A29CCBC4E001A0218 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD126929CCBC4E001A0218 /* LocationManager.swift */; };
+		4BDD126C29CCCB06001A0218 /* CKAsset+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD126B29CCCB06001A0218 /* CKAsset+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		4BDD126329CCB5B1001A0218 /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
 		4BDD126629CCB94E001A0218 /* LocationMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapViewModel.swift; sourceTree = "<group>"; };
 		4BDD126929CCBC4E001A0218 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		4BDD126B29CCCB06001A0218 /* CKAsset+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CKAsset+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				4B7E09EB29CA351700377AF4 /* View+.swift */,
 				4B7E09D229C8F62000377AF4 /* Color+.swift */,
 				4BDD126129CC9EAE001A0218 /* CKRecord+.swift */,
+				4BDD126B29CCCB06001A0218 /* CKAsset+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				4B7E09DB29C8F71C00377AF4 /* ProfileView.swift in Sources */,
 				4B7E09E629CA327B00377AF4 /* LocationCell.swift in Sources */,
 				4BDD126A29CCBC4E001A0218 /* LocationManager.swift in Sources */,
+				4BDD126C29CCCB06001A0218 /* CKAsset+.swift in Sources */,
 				4B7E09EE29CA35F300377AF4 /* DDGButton.swift in Sources */,
 				4B7E09E829CA32A800377AF4 /* AvatarView.swift in Sources */,
 				4B7E09C429C8F37B00377AF4 /* DubDubGrubApp.swift in Sources */,
