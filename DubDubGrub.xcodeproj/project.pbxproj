@@ -31,6 +31,9 @@
 		4BDD126729CCB94E001A0218 /* LocationMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD126629CCB94E001A0218 /* LocationMapViewModel.swift */; };
 		4BDD126A29CCBC4E001A0218 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD126929CCBC4E001A0218 /* LocationManager.swift */; };
 		4BDD126C29CCCB06001A0218 /* CKAsset+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD126B29CCCB06001A0218 /* CKAsset+.swift */; };
+		4BDD126E29CCF56F001A0218 /* OnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD126D29CCF56F001A0218 /* OnboardView.swift */; };
+		4BDD127029CCF5B0001A0218 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD126F29CCF5B0001A0218 /* LogoView.swift */; };
+		4BDD127329CCF95C001A0218 /* XDismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD127229CCF95C001A0218 /* XDismissButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +63,9 @@
 		4BDD126629CCB94E001A0218 /* LocationMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapViewModel.swift; sourceTree = "<group>"; };
 		4BDD126929CCBC4E001A0218 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		4BDD126B29CCCB06001A0218 /* CKAsset+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CKAsset+.swift"; sourceTree = "<group>"; };
+		4BDD126D29CCF56F001A0218 /* OnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardView.swift; sourceTree = "<group>"; };
+		4BDD126F29CCF5B0001A0218 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
+		4BDD127229CCF95C001A0218 /* XDismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDismissButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +147,7 @@
 				4B7E09D829C8F70C00377AF4 /* LocationListView.swift */,
 				4B7E09E329C9E93800377AF4 /* LocationDetailView.swift */,
 				4B7E09DA29C8F71C00377AF4 /* ProfileView.swift */,
+				4BDD126D29CCF56F001A0218 /* OnboardView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -156,8 +163,9 @@
 		4B7E09F329CA376500377AF4 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				4BDD127129CCF94D001A0218 /* Buttons */,
 				4B7E09E729CA32A800377AF4 /* AvatarView.swift */,
-				4B7E09ED29CA35F300377AF4 /* DDGButton.swift */,
+				4BDD126F29CCF5B0001A0218 /* LogoView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -199,6 +207,15 @@
 				4BDD126929CCBC4E001A0218 /* LocationManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		4BDD127129CCF94D001A0218 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				4B7E09ED29CA35F300377AF4 /* DDGButton.swift */,
+				4BDD127229CCF95C001A0218 /* XDismissButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,12 +301,15 @@
 				4B7E09EC29CA351700377AF4 /* View+.swift in Sources */,
 				4BDD126229CC9EAE001A0218 /* CKRecord+.swift in Sources */,
 				4B7E09D529C8F69A00377AF4 /* AppTabView.swift in Sources */,
+				4BDD127029CCF5B0001A0218 /* LogoView.swift in Sources */,
+				4BDD127329CCF95C001A0218 /* XDismissButton.swift in Sources */,
 				4BDD126429CCB5B1001A0218 /* AlertItem.swift in Sources */,
 				4BDD125E29CC9AA3001A0218 /* CloudKitManager.swift in Sources */,
 				4B7E09DB29C8F71C00377AF4 /* ProfileView.swift in Sources */,
 				4B7E09E629CA327B00377AF4 /* LocationCell.swift in Sources */,
 				4BDD126A29CCBC4E001A0218 /* LocationManager.swift in Sources */,
 				4BDD126C29CCCB06001A0218 /* CKAsset+.swift in Sources */,
+				4BDD126E29CCF56F001A0218 /* OnboardView.swift in Sources */,
 				4B7E09EE29CA35F300377AF4 /* DDGButton.swift in Sources */,
 				4B7E09E829CA32A800377AF4 /* AvatarView.swift in Sources */,
 				4B7E09C429C8F37B00377AF4 /* DubDubGrubApp.swift in Sources */,
