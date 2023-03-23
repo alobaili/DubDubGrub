@@ -13,15 +13,16 @@ final class LocationMapViewModel: ObservableObject {
         span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     )
     @Published var alertItem: AlertItem?
-    @Published var locations = [DDGLocation]()
 
-    func getLocations() {
-        CloudKitManager.getLocations { [self] result in
-            switch result {
-                case .success(let locations):
-                    self.locations = locations
-                case .failure:
-                    alertItem = AlertContext.unableToGetLocations
+    func getLocations(for locationManager: LocationManager) {
+        CloudKitManager.getLocations { result in
+            DispatchQueue.main.async { [self] in
+                switch result {
+                    case .success(let locations):
+                        locationManager.locations = locations
+                    case .failure:
+                        alertItem = AlertContext.unableToGetLocations
+                }
             }
         }
     }
