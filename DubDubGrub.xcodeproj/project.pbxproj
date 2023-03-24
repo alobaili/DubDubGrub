@@ -34,6 +34,7 @@
 		4BDD126E29CCF56F001A0218 /* OnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD126D29CCF56F001A0218 /* OnboardView.swift */; };
 		4BDD127029CCF5B0001A0218 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD126F29CCF5B0001A0218 /* LogoView.swift */; };
 		4BDD127329CCF95C001A0218 /* XDismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD127229CCF95C001A0218 /* XDismissButton.swift */; };
+		4BDD127629CDE52A001A0218 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD127529CDE52A001A0218 /* PhotoPicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		4BDD126D29CCF56F001A0218 /* OnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardView.swift; sourceTree = "<group>"; };
 		4BDD126F29CCF5B0001A0218 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		4BDD127229CCF95C001A0218 /* XDismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDismissButton.swift; sourceTree = "<group>"; };
+		4BDD127529CDE52A001A0218 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 		4B7E09F329CA376500377AF4 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				4BDD127429CDE501001A0218 /* UIKit Components */,
 				4BDD127129CCF94D001A0218 /* Buttons */,
 				4B7E09E729CA32A800377AF4 /* AvatarView.swift */,
 				4BDD126F29CCF5B0001A0218 /* LogoView.swift */,
@@ -216,6 +219,14 @@
 				4BDD127229CCF95C001A0218 /* XDismissButton.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		4BDD127429CDE501001A0218 /* UIKit Components */ = {
+			isa = PBXGroup;
+			children = (
+				4BDD127529CDE52A001A0218 /* PhotoPicker.swift */,
+			);
+			path = "UIKit Components";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,6 +309,7 @@
 				4B7E09E429C9E93800377AF4 /* LocationDetailView.swift in Sources */,
 				4BDD125929CC8830001A0218 /* DDGProfile.swift in Sources */,
 				4BDD125729CA51E1001A0218 /* DDGLocation.swift in Sources */,
+				4BDD127629CDE52A001A0218 /* PhotoPicker.swift in Sources */,
 				4B7E09EC29CA351700377AF4 /* View+.swift in Sources */,
 				4BDD126229CC9EAE001A0218 /* CKRecord+.swift in Sources */,
 				4B7E09D529C8F69A00377AF4 /* AppTabView.swift in Sources */,
