@@ -35,6 +35,7 @@
 		4BDD127029CCF5B0001A0218 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD126F29CCF5B0001A0218 /* LogoView.swift */; };
 		4BDD127329CCF95C001A0218 /* XDismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD127229CCF95C001A0218 /* XDismissButton.swift */; };
 		4BDD127629CDE52A001A0218 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD127529CDE52A001A0218 /* PhotoPicker.swift */; };
+		4BDD127C29CF18DC001A0218 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD127B29CF18DC001A0218 /* UIImage+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		4BDD126F29CCF5B0001A0218 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		4BDD127229CCF95C001A0218 /* XDismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDismissButton.swift; sourceTree = "<group>"; };
 		4BDD127529CDE52A001A0218 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
+		4BDD127B29CF18DC001A0218 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				4B7E09D229C8F62000377AF4 /* Color+.swift */,
 				4BDD126129CC9EAE001A0218 /* CKRecord+.swift */,
 				4BDD126B29CCCB06001A0218 /* CKAsset+.swift */,
+				4BDD127B29CF18DC001A0218 /* UIImage+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				4B7E09D729C8F6F100377AF4 /* LocationMapView.swift in Sources */,
 				4BDD126729CCB94E001A0218 /* LocationMapViewModel.swift in Sources */,
 				4B7E09D929C8F70C00377AF4 /* LocationListView.swift in Sources */,
+				4BDD127C29CF18DC001A0218 /* UIImage+.swift in Sources */,
 				4BDD125B29CC89CE001A0218 /* MockData.swift in Sources */,
 				4B7E09E429C9E93800377AF4 /* LocationDetailView.swift in Sources */,
 				4BDD125929CC8830001A0218 /* DDGProfile.swift in Sources */,
