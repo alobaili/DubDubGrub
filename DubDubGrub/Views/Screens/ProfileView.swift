@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct ProfileView: View {
     @State private var firstName = ""
@@ -108,7 +109,51 @@ struct ProfileView: View {
             return
         }
 
-        // create the profile and send it to CloudKit.
+        // Create the CKRecord from the profile view.
+        let profileRecord = CKRecord(recordType: RecordType.profile)
+        profileRecord[DDGProfile.kFirstName] = firstName
+        profileRecord[DDGProfile.kLastName] = lastName
+        profileRecord[DDGProfile.kCompanyName] = companyName
+        profileRecord[DDGProfile.kBio] = bio
+        profileRecord[DDGProfile.kAvatar] = avatar.convertToCKAsset()
+
+        // Get our UserRecordID from the container.
+        CKContainer.default().fetchUserRecordID { recordID, error in
+            guard let recordID, error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+
+            // Get our UserRecord from the public database.
+            CKContainer.default().publicCloudDatabase.fetch(
+                withRecordID: recordID
+            ) { userRecord, error in
+                guard let userRecord, error == nil else {
+                    print(error!.localizedDescription)
+                    return
+                }
+
+                // Create reference in UserRecord to the DDGProfile we created.
+                userRecord["userProfile"] = CKRecord.Reference(
+                    recordID: profileRecord.recordID,
+                    action: .none
+                )
+
+                // Create a CKOperation to save our User and Profile records.
+                let operation = CKModifyRecordsOperation(recordsToSave: [userRecord, profileRecord])
+
+                operation.modifyRecordsCompletionBlock = { savedRecords, _, error in
+                    guard let savedRecords, error == nil else {
+                        print(error!.localizedDescription)
+                        return
+                    }
+
+                    print(savedRecords)
+                }
+
+                CKContainer.default().publicCloudDatabase.add(operation)
+            }
+        }
     }
 }
 
