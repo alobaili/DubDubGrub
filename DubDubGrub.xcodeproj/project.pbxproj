@@ -37,6 +37,7 @@
 		4BDD127629CDE52A001A0218 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD127529CDE52A001A0218 /* PhotoPicker.swift */; };
 		4BDD127C29CF18DC001A0218 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD127B29CF18DC001A0218 /* UIImage+.swift */; };
 		4BDD127F29CF2E5F001A0218 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD127E29CF2E5F001A0218 /* ProfileViewModel.swift */; };
+		4BDD128129CF976B001A0218 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD128029CF976B001A0218 /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		4BDD127529CDE52A001A0218 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		4BDD127B29CF18DC001A0218 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		4BDD127E29CF2E5F001A0218 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		4BDD128029CF976B001A0218 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 				4BDD127129CCF94D001A0218 /* Buttons */,
 				4B7E09E729CA32A800377AF4 /* AvatarView.swift */,
 				4BDD126F29CCF5B0001A0218 /* LogoView.swift */,
+				4BDD128029CF976B001A0218 /* LoadingView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				4BDD126A29CCBC4E001A0218 /* LocationManager.swift in Sources */,
 				4BDD126C29CCCB06001A0218 /* CKAsset+.swift in Sources */,
 				4BDD126E29CCF56F001A0218 /* OnboardView.swift in Sources */,
+				4BDD128129CF976B001A0218 /* LoadingView.swift in Sources */,
 				4B7E09EE29CA35F300377AF4 /* DDGButton.swift in Sources */,
 				4B7E09E829CA32A800377AF4 /* AvatarView.swift in Sources */,
 				4B7E09C429C8F37B00377AF4 /* DubDubGrubApp.swift in Sources */,
