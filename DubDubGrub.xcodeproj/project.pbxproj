@@ -38,6 +38,7 @@
 		4BDD127C29CF18DC001A0218 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD127B29CF18DC001A0218 /* UIImage+.swift */; };
 		4BDD127F29CF2E5F001A0218 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD127E29CF2E5F001A0218 /* ProfileViewModel.swift */; };
 		4BDD128129CF976B001A0218 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD128029CF976B001A0218 /* LoadingView.swift */; };
+		4BDD128429D0D1C8001A0218 /* LocationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD128329D0D1C8001A0218 /* LocationDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		4BDD127B29CF18DC001A0218 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		4BDD127E29CF2E5F001A0218 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		4BDD128029CF976B001A0218 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		4BDD128329D0D1C8001A0218 /* LocationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,11 +153,11 @@
 		4B7E09F129CA373300377AF4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				4BDD128229D0D1A3001A0218 /* LocationDetailView */,
 				4BDD127D29CF2E40001A0218 /* ProfileView */,
 				4BDD126529CCB932001A0218 /* LocationMapView */,
 				4B7E09D429C8F69A00377AF4 /* AppTabView.swift */,
 				4B7E09D829C8F70C00377AF4 /* LocationListView.swift */,
-				4B7E09E329C9E93800377AF4 /* LocationDetailView.swift */,
 				4BDD126D29CCF56F001A0218 /* OnboardView.swift */,
 			);
 			path = Screens;
@@ -246,6 +248,15 @@
 			path = ProfileView;
 			sourceTree = "<group>";
 		};
+		4BDD128229D0D1A3001A0218 /* LocationDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				4B7E09E329C9E93800377AF4 /* LocationDetailView.swift */,
+				4BDD128329D0D1C8001A0218 /* LocationDetailViewModel.swift */,
+			);
+			path = LocationDetailView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -320,6 +331,7 @@
 				4BDD126029CC9BBA001A0218 /* Constants.swift in Sources */,
 				4B7E09EA29CA34E400377AF4 /* CustomModifier.swift in Sources */,
 				4B7E09D729C8F6F100377AF4 /* LocationMapView.swift in Sources */,
+				4BDD128429D0D1C8001A0218 /* LocationDetailViewModel.swift in Sources */,
 				4BDD126729CCB94E001A0218 /* LocationMapViewModel.swift in Sources */,
 				4B7E09D929C8F70C00377AF4 /* LocationListView.swift in Sources */,
 				4BDD127F29CF2E5F001A0218 /* ProfileViewModel.swift in Sources */,
