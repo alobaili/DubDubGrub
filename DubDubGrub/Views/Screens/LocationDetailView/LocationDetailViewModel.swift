@@ -18,6 +18,7 @@ final class LocationDetailViewModel: ObservableObject {
     @Published var isShowingProfileModal = false
     @Published var checkedInProfiles = [DDGProfile]()
     @Published var isCheckedIn = false
+    @Published var isLoading = false
     
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     var location: DDGLocation
@@ -42,11 +43,30 @@ final class LocationDetailViewModel: ObservableObject {
         }
         UIApplication.shared.open(url)
     }
+
+    func getCheckedInStatus() {
+        guard let profileRecordID = CloudKitManager.shared.profileRecordID else { return }
+
+        CloudKitManager.shared.fetchRecord(with: profileRecordID) { result in
+            DispatchQueue.main.async { [self] in
+                switch result {
+                    case .success(let record):
+                        if let reference = record[DDGProfile.kIsCheckedIn] as? CKRecord.Reference {
+                            isCheckedIn = reference.recordID == location.id
+                        } else {
+                            isCheckedIn = false
+                        }
+                    case .failure:
+                        alertItem = AlertContext.unableToGetCheckedInStatus
+                }
+            }
+        }
+    }
     
     func updateCheckInStatus(to checkInStatus: CheckInStatus) {
         // Retrieve the DDGProfile.
         guard let profileRecordID = CloudKitManager.shared.profileRecordID else {
-            // Show alert.
+            alertItem = AlertContext.unableToGetProfile
             return
         }
         
@@ -66,11 +86,11 @@ final class LocationDetailViewModel: ObservableObject {
                     
                     // Save the updated profile to CloudKit.
                     CloudKitManager.shared.save(record: record) { result in
-                        let profile = DDGProfile(record: record)
-
                         DispatchQueue.main.async { [self] in
                             switch result {
-                                case .success:
+                                case .success(let record):
+                                    let profile = DDGProfile(record: record)
+
                                     switch checkInStatus {
                                         case .checkedIn:
                                             checkedInProfiles.append(profile)
@@ -79,29 +99,37 @@ final class LocationDetailViewModel: ObservableObject {
                                     }
 
                                     isCheckedIn = checkInStatus == .checkedIn
-
-                                    print("✅ Checked In/Out successfully")
                                 case .failure:
-                                    print("❌ Error saving record")
+                                    alertItem = AlertContext.unableToCheckInOrOut
                             }
                         }
                     }
                 case .failure:
-                    print("❌ Error fetching record")
+                    alertItem = AlertContext.unableToCheckInOrOut
             }
         }
     }
     
     func getCheckedInProfiles() {
+        showLoadingView()
         CloudKitManager.shared.getCheckedInProfiles(for: location.id) { result in
             DispatchQueue.main.async { [self] in
                 switch result {
                     case .success(let profiles):
                         checkedInProfiles = profiles
                     case .failure:
-                        print("Error fetching checked in profiles.")
+                        alertItem = AlertContext.unableToGetCheckedInProfiles
                 }
+                hideLoadingView()
             }
         }
+    }
+
+    private func showLoadingView() {
+        isLoading = true
+    }
+
+    private func hideLoadingView() {
+        isLoading = false
     }
 }
