@@ -20,6 +20,7 @@ final class ProfileViewModel: ObservableObject {
     @Published var avatar = PlaceholderImage.avatar
     @Published var isShowingPhotoPicker = false
     @Published var isLoading = false
+    @Published var isCheckedIn = false
     @Published var alertItem: AlertItem?
 
     private var existingProfileRecord: CKRecord? {
@@ -43,6 +44,54 @@ final class ProfileViewModel: ObservableObject {
         }
 
         return true
+    }
+
+    func getCheckedInStatus() {
+        guard let profileRecordID = CloudKitManager.shared.profileRecordID else { return }
+
+        CloudKitManager.shared.fetchRecord(with: profileRecordID) { result in
+            DispatchQueue.main.async { [self] in
+                switch result {
+                    case .success(let record):
+                        if let _ = record[DDGProfile.kIsCheckedIn] as? CKRecord.Reference {
+                            isCheckedIn = true
+                        } else {
+                            isCheckedIn = false
+                        }
+                    case .failure:
+                        break
+                }
+            }
+        }
+    }
+
+    func checkOut() {
+        guard let profileID = CloudKitManager.shared.profileRecordID else {
+            alertItem = AlertContext.unableToGetProfile
+            return
+        }
+
+        CloudKitManager.shared.fetchRecord(with: profileID) { result in
+            switch result {
+                case .success(let record):
+                    record[DDGProfile.kIsCheckedIn] = nil
+
+                    CloudKitManager.shared.save(record: record) { result in
+                        DispatchQueue.main.async { [self] in
+                            switch result {
+                                case .success:
+                                    isCheckedIn = false
+                                case .failure:
+                                    alertItem = AlertContext.unableToCheckInOrOut
+                            }
+                        }
+                    }
+                case .failure:
+                    DispatchQueue.main.async {
+                        self.alertItem = AlertContext.unableToCheckInOrOut
+                    }
+            }
+        }
     }
 
     func createProfile() {
