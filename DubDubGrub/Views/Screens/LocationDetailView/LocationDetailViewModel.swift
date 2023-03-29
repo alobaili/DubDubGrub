@@ -80,8 +80,10 @@ final class LocationDetailViewModel: ObservableObject {
                                 recordID: location.id,
                                 action: .none
                             )
+                            record[DDGProfile.kIsCheckedInNilCheck] = 1
                         case .checkedOut:
                             record[DDGProfile.kIsCheckedIn] = nil
+                            record[DDGProfile.kIsCheckedInNilCheck] = nil
                     }
                     
                     // Save the updated profile to CloudKit.

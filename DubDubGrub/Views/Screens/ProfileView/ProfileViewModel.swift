@@ -81,6 +81,7 @@ final class ProfileViewModel: ObservableObject {
                             switch result {
                                 case .success:
                                     isCheckedIn = false
+                                    record[DDGProfile.kIsCheckedInNilCheck] = nil
                                 case .failure:
                                     alertItem = AlertContext.unableToCheckInOrOut
                             }
