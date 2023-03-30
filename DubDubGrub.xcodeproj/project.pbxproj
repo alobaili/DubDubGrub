@@ -41,6 +41,7 @@
 		4BDD128429D0D1C8001A0218 /* LocationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD128329D0D1C8001A0218 /* LocationDetailViewModel.swift */; };
 		4BDD128629D1FF4C001A0218 /* ProfileModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD128529D1FF4C001A0218 /* ProfileModalView.swift */; };
 		4BDD128929D61CDA001A0218 /* LocationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD128829D61CDA001A0218 /* LocationListViewModel.swift */; };
+		4BDD128C29D626A9001A0218 /* MapBaloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD128B29D626A9001A0218 /* MapBaloon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		4BDD128329D0D1C8001A0218 /* LocationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailViewModel.swift; sourceTree = "<group>"; };
 		4BDD128529D1FF4C001A0218 /* ProfileModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModalView.swift; sourceTree = "<group>"; };
 		4BDD128829D61CDA001A0218 /* LocationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListViewModel.swift; sourceTree = "<group>"; };
+		4BDD128B29D626A9001A0218 /* MapBaloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBaloon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 		4B7E09F329CA376500377AF4 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				4BDD128A29D62693001A0218 /* Map Annotation */,
 				4BDD127429CDE501001A0218 /* UIKit Components */,
 				4BDD127129CCF94D001A0218 /* Buttons */,
 				4B7E09E729CA32A800377AF4 /* AvatarView.swift */,
@@ -263,6 +266,14 @@
 			path = LocationListView;
 			sourceTree = "<group>";
 		};
+		4BDD128A29D62693001A0218 /* Map Annotation */ = {
+			isa = PBXGroup;
+			children = (
+				4BDD128B29D626A9001A0218 /* MapBaloon.swift */,
+			);
+			path = "Map Annotation";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -340,6 +351,7 @@
 				4BDD128429D0D1C8001A0218 /* LocationDetailViewModel.swift in Sources */,
 				4BDD126729CCB94E001A0218 /* LocationMapViewModel.swift in Sources */,
 				4B7E09D929C8F70C00377AF4 /* LocationListView.swift in Sources */,
+				4BDD128C29D626A9001A0218 /* MapBaloon.swift in Sources */,
 				4BDD127F29CF2E5F001A0218 /* ProfileViewModel.swift in Sources */,
 				4BDD127C29CF18DC001A0218 /* UIImage+.swift in Sources */,
 				4BDD125B29CC89CE001A0218 /* MockData.swift in Sources */,
