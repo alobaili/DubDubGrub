@@ -40,6 +40,7 @@
 		4BDD128129CF976B001A0218 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD128029CF976B001A0218 /* LoadingView.swift */; };
 		4BDD128429D0D1C8001A0218 /* LocationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD128329D0D1C8001A0218 /* LocationDetailViewModel.swift */; };
 		4BDD128629D1FF4C001A0218 /* ProfileModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD128529D1FF4C001A0218 /* ProfileModalView.swift */; };
+		4BDD128929D61CDA001A0218 /* LocationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD128829D61CDA001A0218 /* LocationListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		4BDD128029CF976B001A0218 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		4BDD128329D0D1C8001A0218 /* LocationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailViewModel.swift; sourceTree = "<group>"; };
 		4BDD128529D1FF4C001A0218 /* ProfileModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModalView.swift; sourceTree = "<group>"; };
+		4BDD128829D61CDA001A0218 /* LocationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +148,6 @@
 			children = (
 				4B7E09E929CA34E400377AF4 /* CustomModifier.swift */,
 				4B7E09F329CA376500377AF4 /* CustomViews */,
-				4B7E09F229CA375900377AF4 /* Cells */,
 				4B7E09F129CA373300377AF4 /* Screens */,
 			);
 			path = Views;
@@ -155,22 +156,14 @@
 		4B7E09F129CA373300377AF4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				4BDD128729D61CA4001A0218 /* LocationListView */,
 				4BDD128229D0D1A3001A0218 /* LocationDetailView */,
 				4BDD127D29CF2E40001A0218 /* ProfileView */,
 				4BDD126529CCB932001A0218 /* LocationMapView */,
 				4B7E09D429C8F69A00377AF4 /* AppTabView.swift */,
-				4B7E09D829C8F70C00377AF4 /* LocationListView.swift */,
 				4BDD126D29CCF56F001A0218 /* OnboardView.swift */,
 			);
 			path = Screens;
-			sourceTree = "<group>";
-		};
-		4B7E09F229CA375900377AF4 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				4B7E09E529CA327B00377AF4 /* LocationCell.swift */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		4B7E09F329CA376500377AF4 /* CustomViews */ = {
@@ -258,6 +251,16 @@
 				4BDD128529D1FF4C001A0218 /* ProfileModalView.swift */,
 			);
 			path = LocationDetailView;
+			sourceTree = "<group>";
+		};
+		4BDD128729D61CA4001A0218 /* LocationListView */ = {
+			isa = PBXGroup;
+			children = (
+				4B7E09E529CA327B00377AF4 /* LocationCell.swift */,
+				4B7E09D829C8F70C00377AF4 /* LocationListView.swift */,
+				4BDD128829D61CDA001A0218 /* LocationListViewModel.swift */,
+			);
+			path = LocationListView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -353,6 +356,7 @@
 				4BDD125E29CC9AA3001A0218 /* CloudKitManager.swift in Sources */,
 				4BDD128629D1FF4C001A0218 /* ProfileModalView.swift in Sources */,
 				4B7E09DB29C8F71C00377AF4 /* ProfileView.swift in Sources */,
+				4BDD128929D61CDA001A0218 /* LocationListViewModel.swift in Sources */,
 				4B7E09E629CA327B00377AF4 /* LocationCell.swift in Sources */,
 				4BDD126A29CCBC4E001A0218 /* LocationManager.swift in Sources */,
 				4BDD126C29CCCB06001A0218 /* CKAsset+.swift in Sources */,
