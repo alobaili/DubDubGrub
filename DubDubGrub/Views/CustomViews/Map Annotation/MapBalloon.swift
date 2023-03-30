@@ -1,5 +1,5 @@
 //
-//  MapBaloon.swift
+//  MapBalloon.swift
 //  DubDubGrub
 //
 //  Created by Abdulaziz Alobaili on 30/03/2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MapBaloon: Shape {
+struct MapBalloon: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
         path.move(to: CGPoint(x: rect.midX, y: rect.maxY))
@@ -23,9 +23,9 @@ struct MapBaloon: Shape {
     }
 }
 
-struct MapBaloon_Previews: PreviewProvider {
+struct MapBalloon_Previews: PreviewProvider {
     static var previews: some View {
-        MapBaloon()
+        MapBalloon()
             .frame(width: 300, height: 240)
             .foregroundColor(.brandPrimary)
     }
