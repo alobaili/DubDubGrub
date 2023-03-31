@@ -16,7 +16,6 @@ final class LocationListViewModel: ObservableObject {
                 switch result {
                     case .success(let checkedInProfiles):
                         self.checkedInProfiles = checkedInProfiles
-                        print(checkedInProfiles)
                     case .failure:
                         print("Error getting back dictionary.")
                 }

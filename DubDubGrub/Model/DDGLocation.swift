@@ -35,7 +35,10 @@ struct DDGLocation: Identifiable {
         squareAsset = record[DDGLocation.kSquareAsset] as? CKAsset
         bannerAsset = record[DDGLocation.kBannerAsset] as? CKAsset
         addess = record[DDGLocation.kAddress] as? String ?? "N/A"
-        location = record[DDGLocation.kLocation] as? CLLocation ?? CLLocation(latitude: 0, longitude: 0)
+
+        let defaultLocation = CLLocation(latitude: 0, longitude: 0)
+        location = record[DDGLocation.kLocation] as? CLLocation ?? defaultLocation
+
         websiteURL = record[DDGLocation.kWebsiteURL] as? String ?? "N/A"
         phoneNumber = record[DDGLocation.kPhoneNumber] as? String ?? "N/A"
     }

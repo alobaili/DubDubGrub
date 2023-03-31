@@ -19,6 +19,7 @@ struct MapBalloon: Shape {
             to: CGPoint(x: rect.midX, y: rect.maxY),
             control: CGPoint(x: rect.maxX, y: rect.minY)
         )
+
         return path
     }
 }

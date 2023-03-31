@@ -45,7 +45,10 @@ final class CloudKitManager {
         let sortDescriptor = NSSortDescriptor(key: DDGLocation.kName, ascending: true)
         query.sortDescriptors = [sortDescriptor]
 
-        CKContainer.default().publicCloudDatabase.perform(query, inZoneWith: nil) { records, error in
+        CKContainer.default().publicCloudDatabase.perform(
+            query,
+            inZoneWith: nil
+        ) { records, error in
             guard error == nil else {
                 completion(.failure(error!))
                 return
@@ -67,7 +70,10 @@ final class CloudKitManager {
         let predicate = NSPredicate(format: "isCheckedIn == %@", reference)
         let query = CKQuery(recordType: RecordType.profile, predicate: predicate)
 
-        CKContainer.default().publicCloudDatabase.perform(query, inZoneWith: nil) { records, error in
+        CKContainer.default().publicCloudDatabase.perform(
+            query,
+            inZoneWith: nil
+        ) { records, error in
             guard let records, error == nil else {
                 completion(.failure(error!))
                 return

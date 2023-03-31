@@ -60,6 +60,9 @@ struct ProfileModalView: View {
 
 struct ProfileModalView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileModalView(profile: DDGProfile(record: MockData.profile), isShowingProfileModal: .constant(true))
+        ProfileModalView(
+            profile: DDGProfile(record: MockData.profile),
+            isShowingProfileModal: .constant(true)
+        )
     }
 }

@@ -14,7 +14,11 @@ struct LocationMapView: View {
 
     var body: some View {
         ZStack {
-            Map(coordinateRegion: $viewModel.region, showsUserLocation: true, annotationItems: locationManager.locations) { location in
+            Map(
+                coordinateRegion: $viewModel.region,
+                showsUserLocation: true,
+                annotationItems: locationManager.locations
+            ) { location in
                 MapAnnotation(
                     coordinate: location.location.coordinate,
                     anchorPoint: CGPoint(x: 0.5, y: 0.75)

@@ -56,6 +56,7 @@ final class LocationDetailViewModel: ObservableObject {
                         } else {
                             isCheckedIn = false
                         }
+
                     case .failure:
                         alertItem = AlertContext.unableToGetCheckedInStatus
                 }
@@ -64,7 +65,6 @@ final class LocationDetailViewModel: ObservableObject {
     }
     
     func updateCheckInStatus(to checkInStatus: CheckInStatus) {
-        // Retrieve the DDGProfile.
         guard let profileRecordID = CloudKitManager.shared.profileRecordID else {
             alertItem = AlertContext.unableToGetProfile
             return
@@ -73,7 +73,6 @@ final class LocationDetailViewModel: ObservableObject {
         CloudKitManager.shared.fetchRecord(with: profileRecordID) { [self] result in
             switch result {
                 case .success(let record):
-                    // Create a reference to the location.
                     switch checkInStatus {
                         case .checkedIn:
                             record[DDGProfile.kIsCheckedIn] = CKRecord.Reference(
@@ -81,12 +80,12 @@ final class LocationDetailViewModel: ObservableObject {
                                 action: .none
                             )
                             record[DDGProfile.kIsCheckedInNilCheck] = 1
+
                         case .checkedOut:
                             record[DDGProfile.kIsCheckedIn] = nil
                             record[DDGProfile.kIsCheckedInNilCheck] = nil
                     }
-                    
-                    // Save the updated profile to CloudKit.
+
                     CloudKitManager.shared.save(record: record) { result in
                         DispatchQueue.main.async { [self] in
                             switch result {
@@ -97,15 +96,17 @@ final class LocationDetailViewModel: ObservableObject {
                                         case .checkedIn:
                                             checkedInProfiles.append(profile)
                                         case .checkedOut:
-                                            checkedInProfiles.removeAll(where: { $0.id == profile.id })
+                                            checkedInProfiles.removeAll { $0.id == profile.id }
                                     }
 
                                     isCheckedIn = checkInStatus == .checkedIn
+
                                 case .failure:
                                     alertItem = AlertContext.unableToCheckInOrOut
                             }
                         }
                     }
+
                 case .failure:
                     alertItem = AlertContext.unableToCheckInOrOut
             }
@@ -122,6 +123,7 @@ final class LocationDetailViewModel: ObservableObject {
                     case .failure:
                         alertItem = AlertContext.unableToGetCheckedInProfiles
                 }
+
                 hideLoadingView()
             }
         }

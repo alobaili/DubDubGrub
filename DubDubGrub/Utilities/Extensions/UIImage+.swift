@@ -10,7 +10,9 @@ import UIKit
 
 extension UIImage {
     func convertToCKAsset() -> CKAsset? {
-        guard let urlPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+        guard
+            let urlPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        else {
             return nil
         }
 

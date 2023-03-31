@@ -31,7 +31,7 @@ final class ProfileViewModel: ObservableObject {
 
     var profileContext: ProfileContext = .create
 
-    func isValidProfile() -> Bool {
+    private func isValidProfile() -> Bool {
         guard
             !firstName.isEmpty,
             !lastName.isEmpty,
@@ -87,6 +87,7 @@ final class ProfileViewModel: ObservableObject {
                             }
                         }
                     }
+
                 case .failure:
                     DispatchQueue.main.async {
                         self.alertItem = AlertContext.unableToCheckInOrOut
@@ -126,6 +127,7 @@ final class ProfileViewModel: ObservableObject {
                         }
 
                         alertItem = AlertContext.createProfileSuccess
+
                     case .failure:
                         alertItem = AlertContext.createProfileFailure
                 }
