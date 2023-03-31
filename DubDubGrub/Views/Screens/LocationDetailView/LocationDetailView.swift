@@ -54,6 +54,8 @@ struct LocationDetailView: View {
                                     ? .checkedOut
                                     : .checkedIn
                                 )
+
+                                playHaptic()
                             } label: {
                                 LocationActionButton(
                                     color: viewModel.isCheckedIn ? .grubRed : .brandPrimary,
