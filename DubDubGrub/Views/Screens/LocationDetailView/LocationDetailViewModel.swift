@@ -22,6 +22,11 @@ final class LocationDetailViewModel: ObservableObject {
     
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     var location: DDGLocation
+    var selectedProfile: DDGProfile? {
+        didSet {
+            isShowingProfileModal = true
+        }
+    }
     
     init(location: DDGLocation) {
         self.location = location

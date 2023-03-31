@@ -35,17 +35,20 @@ struct LocationDetailView: View {
                         } label: {
                             LocationActionButton(color: .brandPrimary, imageName: "location.fill")
                         }
+                        .accessibilityLabel(Text("Get directions"))
 
                         Link(destination: URL(string: viewModel.location.websiteURL)!) {
                             LocationActionButton(color: .brandPrimary, imageName: "network")
-
                         }
+                        .accessibilityRemoveTraits(.isButton)
+                        .accessibilityLabel(Text("Go to website"))
 
                         Button {
                             viewModel.callLocation()
                         } label: {
                             LocationActionButton(color: .brandPrimary, imageName: "phone.fill")
                         }
+                        .accessibilityLabel(Text("Call location"))
 
                         if let _ = CloudKitManager.shared.profileRecordID {
                             Button {
@@ -63,6 +66,7 @@ struct LocationDetailView: View {
                                     ? "person.fill.xmark"
                                     : "person.fill.checkmark"
                                 )
+                                .accessibilityLabel(Text(viewModel.isCheckedIn ? "Check out of location" : "Check into location"))
                             }
                         }
                     }
@@ -72,6 +76,9 @@ struct LocationDetailView: View {
                 Text("Who's Here")
                     .bold()
                     .font(.title2)
+                    .accessibilityAddTraits(.isHeader)
+                    .accessibilityLabel(Text("Who's Here? \(viewModel.checkedInProfiles.count) checked in"))
+                    .accessibilityHint(Text("Bottom section is scrollable"))
 
                 ZStack {
                     if viewModel.checkedInProfiles.isEmpty {
@@ -85,8 +92,12 @@ struct LocationDetailView: View {
                             LazyVGrid(columns: viewModel.columns) {
                                 ForEach(viewModel.checkedInProfiles) { profile in
                                     FirstNameAvatarView(profile: profile)
+                                        .accessibilityElement(children: .ignore)
+                                        .accessibilityAddTraits(.isButton)
+                                        .accessibilityHint(Text("Show's \(profile.firstName) profile pop up."))
+                                        .accessibilityLabel(Text("\(profile.firstName) \(profile.lastName)"))
                                         .onTapGesture {
-                                            viewModel.isShowingProfileModal = true
+                                            viewModel.selectedProfile = profile
                                         }
                                 }
                             }
@@ -107,11 +118,13 @@ struct LocationDetailView: View {
                     .opacity(0.9)
                     .transition(AnyTransition.opacity.animation(.easeOut))
                     .zIndex(1)
+                    .accessibilityHidden(true)
 
                 ProfileModalView(
-                    profile: DDGProfile(record: MockData.profile),
+                    profile: viewModel.selectedProfile!,
                     isShowingProfileModal: $viewModel.isShowingProfileModal
                 )
+                .accessibilityAddTraits(.isModal)
                 .transition(.opacity.combined(with: .slide))
                 .animation(.easeOut)
                 .zIndex(2)
@@ -183,6 +196,7 @@ struct BannerImageView: View {
             .resizable()
             .scaledToFill()
             .frame(height: 120)
+            .accessibilityHidden(true)
     }
 }
 

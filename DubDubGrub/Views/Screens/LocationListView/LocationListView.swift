@@ -22,6 +22,8 @@ struct LocationListView: View {
                             location: location,
                             profiles: viewModel.checkedInProfiles[location.id, default: []]
                         )
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel(Text(viewModel.createVoiceOverSummery(for: location)))
                     }
                 }
             }

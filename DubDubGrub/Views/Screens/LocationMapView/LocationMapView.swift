@@ -27,10 +27,11 @@ struct LocationMapView: View {
                         location: location,
                         number: viewModel.checkedInProfiles[location.id, default: 0]
                     )
-                        .onTapGesture {
-                            locationManager.selectedLocation = location
-                            viewModel.isShowingDetailView = true
-                        }
+                    .accessibilityLabel(Text("Map Pin \(location.name) \(viewModel.checkedInProfiles[location.id, default: 0]) people checked in."))
+                    .onTapGesture {
+                        locationManager.selectedLocation = location
+                        viewModel.isShowingDetailView = true
+                    }
                 }
             }
             .accentColor(.brandSecondry)
