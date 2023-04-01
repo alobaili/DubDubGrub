@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LocationDetailView: View {
     @ObservedObject var viewModel: LocationDetailViewModel
+    @Environment(\.sizeCategory) var sizeCategory
 
     var body: some View {
         ZStack {
@@ -89,7 +90,7 @@ struct LocationDetailView: View {
                             .padding(.top, 30)
                     } else {
                         ScrollView {
-                            LazyVGrid(columns: viewModel.columns) {
+                            LazyVGrid(columns: viewModel.determineColumns(for: sizeCategory)) {
                                 ForEach(viewModel.checkedInProfiles) { profile in
                                     FirstNameAvatarView(profile: profile)
                                         .accessibilityElement(children: .ignore)
@@ -113,7 +114,7 @@ struct LocationDetailView: View {
             }
 
             if viewModel.isShowingProfileModal {
-                Color(.systemBackground)
+                Color.black
                     .ignoresSafeArea()
                     .opacity(0.9)
                     .transition(AnyTransition.opacity.animation(.easeOut))
@@ -149,8 +150,15 @@ struct LocationDetailView: View {
 struct LocationDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LocationDetailView(viewModel: LocationDetailViewModel(location: DDGLocation(record: MockData.location)))
+            LocationDetailView(viewModel: LocationDetailViewModel(location: DDGLocation(record: MockData.chipotle)))
         }
+        .preferredColorScheme(.dark)
+        .environment(\.sizeCategory, .extraExtraExtraLarge)
+
+        NavigationView {
+            LocationDetailView(viewModel: LocationDetailViewModel(location: DDGLocation(record: MockData.chipotle))).embedInScrollView()
+        }
+        .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
     }
 }
 
@@ -174,11 +182,15 @@ struct LocationActionButton: View {
 }
 
 struct FirstNameAvatarView: View {
+    @Environment(\.sizeCategory) var sizeCategory
     var profile: DDGProfile
 
     var body: some View {
         VStack {
-            AvatarView(image: profile.createAvatarImage(), size: 64)
+            AvatarView(
+                image: profile.createAvatarImage(),
+                size: sizeCategory >= .accessibilityMedium ? 100 : 64
+            )
 
             Text(profile.firstName)
                 .bold()
@@ -215,9 +227,8 @@ struct DescriptionView: View {
 
     var body: some View {
         Text(text)
-            .lineLimit(3)
             .minimumScaleFactor(0.75)
-            .frame(height: 70)
+            .fixedSize(horizontal: false, vertical: true)
             .padding(.horizontal)
     }
 }

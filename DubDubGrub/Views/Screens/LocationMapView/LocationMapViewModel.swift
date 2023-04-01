@@ -7,6 +7,7 @@
 
 import MapKit
 import CloudKit
+import SwiftUI
 
 final class LocationMapViewModel: ObservableObject {
     @Published var checkedInProfiles = [CKRecord.ID: Int]()
@@ -41,6 +42,18 @@ final class LocationMapViewModel: ObservableObject {
                         break
                 }
             }
+        }
+    }
+
+    @ViewBuilder func createLocationDetailView(
+        for location: DDGLocation,
+        in sizeCategory: ContentSizeCategory
+    ) -> some View {
+        if sizeCategory >= .accessibilityMedium {
+            LocationDetailView(viewModel: LocationDetailViewModel(location: location))
+                .embedInScrollView()
+        } else {
+            LocationDetailView(viewModel: LocationDetailViewModel(location: location))
         }
     }
 }
