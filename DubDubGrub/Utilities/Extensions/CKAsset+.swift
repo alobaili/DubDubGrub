@@ -10,15 +10,13 @@ import UIKit
 
 extension CKAsset {
     func convertToUIImage(in dimention: ImageDimention) -> UIImage {
-        let placeholder = ImageDimention.getPlaceholder(for: dimention)
-
-        guard let fileURL else { return placeholder }
+        guard let fileURL else { return dimention.placeholder }
 
         do {
             let data = try Data(contentsOf: fileURL)
-            return UIImage(data: data) ?? placeholder
+            return UIImage(data: data) ?? dimention.placeholder
         } catch {
-            return placeholder
+            return dimention.placeholder
         }
     }
 }
