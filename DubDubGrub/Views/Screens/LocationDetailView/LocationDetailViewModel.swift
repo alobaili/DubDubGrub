@@ -20,10 +20,13 @@ final class LocationDetailViewModel: ObservableObject {
     @Published var checkedInProfiles = [DDGProfile]()
     @Published var isCheckedIn = false
     @Published var isLoading = false
-    
+
     var location: DDGLocation
     var selectedProfile: DDGProfile?
-    
+    var buttonColor: Color { isCheckedIn ? .grubRed : .brandPrimary }
+    var buttonImageTitle: String { isCheckedIn ? "person.fill.xmark" : "person.fill.checkmark" }
+    var buttonA11yLabel: String { isCheckedIn ? "Check out of location" : "Check into location" }
+
     init(location: DDGLocation) {
         self.location = location
     }
@@ -33,7 +36,7 @@ final class LocationDetailViewModel: ObservableObject {
 
         return Array(repeating: GridItem(.flexible()), count: numberOfColumns)
     }
-    
+
     func getDirectionToLocation() {
         let placemark = MKPlacemark(coordinate: location.location.coordinate)
         let mapItem = MKMapItem(placemark: placemark)
@@ -42,7 +45,7 @@ final class LocationDetailViewModel: ObservableObject {
             launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
         )
     }
-    
+
     func callLocation() {
         guard let url = URL(string: "tel://\(location.phoneNumber)") else {
             alertItem = AlertContext.invalidPhoneNumber
@@ -70,13 +73,14 @@ final class LocationDetailViewModel: ObservableObject {
             }
         }
     }
-    
+
     func updateCheckInStatus(to checkInStatus: CheckInStatus) {
         guard let profileRecordID = CloudKitManager.shared.profileRecordID else {
             alertItem = AlertContext.unableToGetProfile
             return
         }
-        
+
+        showLoadingView()
         CloudKitManager.shared.fetchRecord(with: profileRecordID) { [self] result in
             switch result {
                 case .success(let record):
@@ -95,8 +99,11 @@ final class LocationDetailViewModel: ObservableObject {
 
                     CloudKitManager.shared.save(record: record) { result in
                         DispatchQueue.main.async { [self] in
+                            hideLoadingView()
+
                             switch result {
                                 case .success(let record):
+                                    HapticManager.playSuccess()
                                     let profile = DDGProfile(record: record)
 
                                     switch checkInStatus {
@@ -106,7 +113,7 @@ final class LocationDetailViewModel: ObservableObject {
                                             checkedInProfiles.removeAll { $0.id == profile.id }
                                     }
 
-                                    isCheckedIn = checkInStatus == .checkedIn
+                                    isCheckedIn.toggle()
 
                                 case .failure:
                                     alertItem = AlertContext.unableToCheckInOrOut
@@ -115,11 +122,12 @@ final class LocationDetailViewModel: ObservableObject {
                     }
 
                 case .failure:
+                    hideLoadingView()
                     alertItem = AlertContext.unableToCheckInOrOut
             }
         }
     }
-    
+
     func getCheckedInProfiles() {
         showLoadingView()
         CloudKitManager.shared.getCheckedInProfiles(for: location.id) { result in
@@ -136,9 +144,9 @@ final class LocationDetailViewModel: ObservableObject {
         }
     }
 
-    func show(profile: DDGProfile, in sizeCategory: ContentSizeCategory) {
+    func show(_ profile: DDGProfile, in sizeCategory: ContentSizeCategory) {
         selectedProfile = profile
-        
+
         if sizeCategory >= .accessibilityMedium {
             isShowingProfileSheet = true
         } else {
@@ -154,3 +162,4 @@ final class LocationDetailViewModel: ObservableObject {
         isLoading = false
     }
 }
+

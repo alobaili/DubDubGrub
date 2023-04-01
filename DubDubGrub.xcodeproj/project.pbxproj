@@ -22,6 +22,7 @@
 		4B7E09EC29CA351700377AF4 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E09EB29CA351700377AF4 /* View+.swift */; };
 		4B7E09EE29CA35F300377AF4 /* DDGButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E09ED29CA35F300377AF4 /* DDGButton.swift */; };
 		4B95A65C29D863FA00A41503 /* ProfileSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B95A65B29D863FA00A41503 /* ProfileSheetView.swift */; };
+		4B95A65E29D8761000A41503 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B95A65D29D8761000A41503 /* HapticManager.swift */; };
 		4BDD125729CA51E1001A0218 /* DDGLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD125629CA51E1001A0218 /* DDGLocation.swift */; };
 		4BDD125929CC8830001A0218 /* DDGProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD125829CC8830001A0218 /* DDGProfile.swift */; };
 		4BDD125B29CC89CE001A0218 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD125A29CC89CE001A0218 /* MockData.swift */; };
@@ -66,6 +67,7 @@
 		4B7E09ED29CA35F300377AF4 /* DDGButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDGButton.swift; sourceTree = "<group>"; };
 		4B95A65A29D77D2F00A41503 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4B95A65B29D863FA00A41503 /* ProfileSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSheetView.swift; sourceTree = "<group>"; };
+		4B95A65D29D8761000A41503 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		4BDD125629CA51E1001A0218 /* DDGLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDGLocation.swift; sourceTree = "<group>"; };
 		4BDD125829CC8830001A0218 /* DDGProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDGProfile.swift; sourceTree = "<group>"; };
 		4BDD125A29CC89CE001A0218 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 			children = (
 				4BDD125D29CC9AA3001A0218 /* CloudKitManager.swift */,
 				4BDD126929CCBC4E001A0218 /* LocationManager.swift */,
+				4B95A65D29D8761000A41503 /* HapticManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				4B7E09EA29CA34E400377AF4 /* CustomModifier.swift in Sources */,
 				4B7E09D729C8F6F100377AF4 /* LocationMapView.swift in Sources */,
 				4BDD128429D0D1C8001A0218 /* LocationDetailViewModel.swift in Sources */,
+				4B95A65E29D8761000A41503 /* HapticManager.swift in Sources */,
 				4BDD126729CCB94E001A0218 /* LocationMapViewModel.swift in Sources */,
 				4B7E09D929C8F70C00377AF4 /* LocationListView.swift in Sources */,
 				4BDD128C29D626A9001A0218 /* MapBalloon.swift in Sources */,
