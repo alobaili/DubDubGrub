@@ -21,6 +21,7 @@
 		4B7E09EA29CA34E400377AF4 /* CustomModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E09E929CA34E400377AF4 /* CustomModifier.swift */; };
 		4B7E09EC29CA351700377AF4 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E09EB29CA351700377AF4 /* View+.swift */; };
 		4B7E09EE29CA35F300377AF4 /* DDGButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E09ED29CA35F300377AF4 /* DDGButton.swift */; };
+		4B95A65C29D863FA00A41503 /* ProfileSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B95A65B29D863FA00A41503 /* ProfileSheetView.swift */; };
 		4BDD125729CA51E1001A0218 /* DDGLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD125629CA51E1001A0218 /* DDGLocation.swift */; };
 		4BDD125929CC8830001A0218 /* DDGProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD125829CC8830001A0218 /* DDGProfile.swift */; };
 		4BDD125B29CC89CE001A0218 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD125A29CC89CE001A0218 /* MockData.swift */; };
@@ -64,6 +65,7 @@
 		4B7E09EB29CA351700377AF4 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		4B7E09ED29CA35F300377AF4 /* DDGButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDGButton.swift; sourceTree = "<group>"; };
 		4B95A65A29D77D2F00A41503 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4B95A65B29D863FA00A41503 /* ProfileSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSheetView.swift; sourceTree = "<group>"; };
 		4BDD125629CA51E1001A0218 /* DDGLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDGLocation.swift; sourceTree = "<group>"; };
 		4BDD125829CC8830001A0218 /* DDGProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDGProfile.swift; sourceTree = "<group>"; };
 		4BDD125A29CC89CE001A0218 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				4B7E09E329C9E93800377AF4 /* LocationDetailView.swift */,
+				4B95A65B29D863FA00A41503 /* ProfileSheetView.swift */,
 				4BDD128329D0D1C8001A0218 /* LocationDetailViewModel.swift */,
 				4BDD128529D1FF4C001A0218 /* ProfileModalView.swift */,
 			);
@@ -390,6 +393,7 @@
 				4B7E09E629CA327B00377AF4 /* LocationCell.swift in Sources */,
 				4BDD126A29CCBC4E001A0218 /* LocationManager.swift in Sources */,
 				4BDD126C29CCCB06001A0218 /* CKAsset+.swift in Sources */,
+				4B95A65C29D863FA00A41503 /* ProfileSheetView.swift in Sources */,
 				4BDD126E29CCF56F001A0218 /* OnboardView.swift in Sources */,
 				4BDD128129CF976B001A0218 /* LoadingView.swift in Sources */,
 				4B7E09EE29CA35F300377AF4 /* DDGButton.swift in Sources */,
