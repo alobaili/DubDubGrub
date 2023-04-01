@@ -38,7 +38,7 @@ struct AppTabView: View {
             isPresented: $viewModel.isShowingOnboardView,
             onDismiss: viewModel.checkIfLocationServicesIsEnabled
         ) {
-            OnboardView(isShowingOnboardView: $viewModel.isShowingOnboardView)
+            OnboardView()
         }
     }
 }

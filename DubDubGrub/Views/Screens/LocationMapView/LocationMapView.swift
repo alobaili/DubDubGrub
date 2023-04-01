@@ -14,7 +14,7 @@ struct LocationMapView: View {
     @Environment(\.sizeCategory) var sizeCategory
 
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             Map(
                 coordinateRegion: $viewModel.region,
                 showsUserLocation: true,
@@ -28,7 +28,6 @@ struct LocationMapView: View {
                         location: location,
                         number: viewModel.checkedInProfiles[location.id, default: 0]
                     )
-                    .accessibilityLabel(Text("Map Pin \(location.name) \(viewModel.checkedInProfiles[location.id, default: 0]) people checked in."))
                     .onTapGesture {
                         locationManager.selectedLocation = location
                         viewModel.isShowingDetailView = true
@@ -38,12 +37,8 @@ struct LocationMapView: View {
             .accentColor(.brandSecondry)
             .ignoresSafeArea()
 
-            VStack {
-                LogoView(frameWidth: 125)
-                    .shadow(radius: 10)
-
-                Spacer()
-            }
+            LogoView(frameWidth: 125)
+                .shadow(radius: 10)
         }
         .sheet(isPresented: $viewModel.isShowingDetailView) {
             NavigationView {
@@ -59,13 +54,7 @@ struct LocationMapView: View {
             }
             .accentColor(.brandPrimary)
         }
-        .alert(item: $viewModel.alertItem) { alertItem in
-            Alert(
-                title: alertItem.title,
-                message: alertItem.message,
-                dismissButton: alertItem.dismissButton
-            )
-        }
+        .alert(item: $viewModel.alertItem) { $0.alert }
         .onAppear {
             if locationManager.locations.isEmpty {
                 viewModel.getLocations(for: locationManager)
