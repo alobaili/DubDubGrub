@@ -12,210 +12,221 @@ enum ProfileContext {
     case create, update
 }
 
-final class ProfileViewModel: ObservableObject {
-    @Published var firstName = ""
-    @Published var lastName = ""
-    @Published var companyName = ""
-    @Published var bio = ""
-    @Published var avatar = PlaceholderImage.avatar
-    @Published var isShowingPhotoPicker = false
-    @Published var isLoading = false
-    @Published var isCheckedIn = false
-    @Published var alertItem: AlertItem?
+extension ProfileView {
+    final class ProfileViewModel: ObservableObject {
+        @Published var firstName = ""
+        @Published var lastName = ""
+        @Published var companyName = ""
+        @Published var bio = ""
+        @Published var avatar = PlaceholderImage.avatar
+        @Published var isShowingPhotoPicker = false
+        @Published var isLoading = false
+        @Published var isCheckedIn = false
+        @Published var alertItem: AlertItem?
 
-    private var existingProfileRecord: CKRecord? {
-        didSet {
-            profileContext = .update
-        }
-    }
-
-    var profileContext: ProfileContext = .create
-
-    private func isValidProfile() -> Bool {
-        guard
-            !firstName.isEmpty,
-            !lastName.isEmpty,
-            !companyName.isEmpty,
-            !bio.isEmpty,
-            avatar != PlaceholderImage.avatar,
-            bio.count <= 100
-        else {
-            return false
+        private var existingProfileRecord: CKRecord? {
+            didSet {
+                profileContext = .update
+            }
         }
 
-        return true
-    }
+        var profileContext: ProfileContext = .create
+        var buttonTitle: String { profileContext == .create ? "Create Profile" : "Update Profile" }
 
-    func getCheckedInStatus() {
-        guard let profileRecordID = CloudKitManager.shared.profileRecordID else { return }
+        private func isValidProfile() -> Bool {
+            guard
+                !firstName.isEmpty,
+                !lastName.isEmpty,
+                !companyName.isEmpty,
+                !bio.isEmpty,
+                avatar != PlaceholderImage.avatar,
+                bio.count <= 100
+            else {
+                return false
+            }
 
-        CloudKitManager.shared.fetchRecord(with: profileRecordID) { result in
-            DispatchQueue.main.async { [self] in
-                switch result {
-                    case .success(let record):
-                        if let _ = record[DDGProfile.kIsCheckedIn] as? CKRecord.Reference {
-                            isCheckedIn = true
-                        } else {
-                            isCheckedIn = false
-                        }
-                    case .failure:
-                        break
+            return true
+        }
+
+        func getCheckedInStatus() {
+            guard let profileRecordID = CloudKitManager.shared.profileRecordID else { return }
+
+            CloudKitManager.shared.fetchRecord(with: profileRecordID) { result in
+                DispatchQueue.main.async { [self] in
+                    switch result {
+                        case .success(let record):
+                            if let _ = record[DDGProfile.kIsCheckedIn] as? CKRecord.Reference {
+                                isCheckedIn = true
+                            } else {
+                                isCheckedIn = false
+                            }
+                        case .failure:
+                            break
+                    }
                 }
             }
         }
-    }
 
-    func checkOut() {
-        guard let profileID = CloudKitManager.shared.profileRecordID else {
-            alertItem = AlertContext.unableToGetProfile
-            return
-        }
+        func checkOut() {
+            guard let profileID = CloudKitManager.shared.profileRecordID else {
+                alertItem = AlertContext.unableToGetProfile
+                return
+            }
 
-        CloudKitManager.shared.fetchRecord(with: profileID) { result in
-            switch result {
-                case .success(let record):
-                    record[DDGProfile.kIsCheckedIn] = nil
-                    record[DDGProfile.kIsCheckedInNilCheck] = nil
+            showLoadingView()
+            CloudKitManager.shared.fetchRecord(with: profileID) { result in
+                switch result {
+                    case .success(let record):
+                        record[DDGProfile.kIsCheckedIn] = nil
+                        record[DDGProfile.kIsCheckedInNilCheck] = nil
 
-                    CloudKitManager.shared.save(record: record) { result in
-                        DispatchQueue.main.async { [self] in
-                            switch result {
-                                case .success:
-                                    isCheckedIn = false
-                                case .failure:
-                                    alertItem = AlertContext.unableToCheckInOrOut
+                        CloudKitManager.shared.save(record: record) { result in
+                            self.hideLoadingView()
+                            DispatchQueue.main.async { [self] in
+                                switch result {
+                                    case .success:
+                                        HapticManager.playSuccess()
+                                        isCheckedIn = false
+                                    case .failure:
+                                        alertItem = AlertContext.unableToCheckInOrOut
+                                }
                             }
                         }
-                    }
 
-                case .failure:
-                    DispatchQueue.main.async {
-                        self.alertItem = AlertContext.unableToCheckInOrOut
-                    }
-            }
-        }
-    }
-
-    func createProfile() {
-        guard isValidProfile() else {
-            alertItem = AlertContext.invalidProfile
-            return
-        }
-
-        let profileRecord = createProfileRecord()
-
-        guard let userRecord = CloudKitManager.shared.userRecord else {
-            alertItem = AlertContext.noUserRecord
-            return
-        }
-
-        userRecord["userProfile"] = CKRecord.Reference(
-            recordID: profileRecord.recordID,
-            action: .none
-        )
-
-        showLoadingView()
-        CloudKitManager.shared.batchSave(records: [userRecord, profileRecord]) { result in
-            DispatchQueue.main.async { [self] in
-                hideLoadingView()
-
-                switch result {
-                    case .success(let records):
-                        for record in records where record.recordType == RecordType.profile {
-                            existingProfileRecord = record
-                            CloudKitManager.shared.profileRecordID = record.recordID
+                    case .failure:
+                        self.hideLoadingView()
+                        DispatchQueue.main.async {
+                            self.alertItem = AlertContext.unableToCheckInOrOut
                         }
-
-                        alertItem = AlertContext.createProfileSuccess
-
-                    case .failure:
-                        alertItem = AlertContext.createProfileFailure
                 }
             }
         }
-    }
 
-    func getProfile() {
-        guard let userRecord = CloudKitManager.shared.userRecord else {
-            alertItem = AlertContext.noUserRecord
-            return
+        func determineButtonAction() {
+            profileContext == .create ? createProfile() : updateProfile()
         }
 
-        guard let profileReference = userRecord["userProfile"] as? CKRecord.Reference else {
-            return
-        }
+        private func createProfile() {
+            guard isValidProfile() else {
+                alertItem = AlertContext.invalidProfile
+                return
+            }
 
-        let profileRecordID = profileReference.recordID
+            let profileRecord = createProfileRecord()
 
-        showLoadingView()
-        CloudKitManager.shared.fetchRecord(with: profileRecordID) { result in
-            DispatchQueue.main.async { [self] in
-                hideLoadingView()
+            guard let userRecord = CloudKitManager.shared.userRecord else {
+                alertItem = AlertContext.noUserRecord
+                return
+            }
 
-                switch result {
-                    case .success(let record):
-                        existingProfileRecord = record
-                        let profile = DDGProfile(record: record)
-                        firstName = profile.firstName
-                        lastName = profile.lastName
-                        companyName = profile.companyName
-                        bio = profile.bio
-                        avatar = profile.avatarImage
-                    case .failure:
-                        alertItem = AlertContext.unableToGetProfile
+            userRecord["userProfile"] = CKRecord.Reference(
+                recordID: profileRecord.recordID,
+                action: .none
+            )
+
+            showLoadingView()
+            CloudKitManager.shared.batchSave(records: [userRecord, profileRecord]) { result in
+                DispatchQueue.main.async { [self] in
+                    hideLoadingView()
+
+                    switch result {
+                        case .success(let records):
+                            for record in records where record.recordType == RecordType.profile {
+                                existingProfileRecord = record
+                                CloudKitManager.shared.profileRecordID = record.recordID
+                            }
+
+                            alertItem = AlertContext.createProfileSuccess
+
+                        case .failure:
+                            alertItem = AlertContext.createProfileFailure
+                    }
                 }
             }
         }
-    }
 
-    func updateProfile() {
-        guard isValidProfile() else {
-            alertItem = AlertContext.invalidProfile
-            return
-        }
+        func getProfile() {
+            guard let userRecord = CloudKitManager.shared.userRecord else {
+                alertItem = AlertContext.noUserRecord
+                return
+            }
 
-        guard let profileRecord = existingProfileRecord else {
-            alertItem = AlertContext.unableToGetProfile
-            return
-        }
+            guard let profileReference = userRecord["userProfile"] as? CKRecord.Reference else {
+                return
+            }
 
-        profileRecord[DDGProfile.kFirstName] = firstName
-        profileRecord[DDGProfile.kLastName] = lastName
-        profileRecord[DDGProfile.kCompanyName] = companyName
-        profileRecord[DDGProfile.kBio] = bio
-        profileRecord[DDGProfile.kAvatar] = avatar.convertToCKAsset()
+            let profileRecordID = profileReference.recordID
 
-        showLoadingView()
-        CloudKitManager.shared.save(record: profileRecord) { result in
-            DispatchQueue.main.async { [self] in
-                hideLoadingView()
+            showLoadingView()
+            CloudKitManager.shared.fetchRecord(with: profileRecordID) { result in
+                DispatchQueue.main.async { [self] in
+                    hideLoadingView()
 
-                switch result {
-                    case .success:
-                        alertItem = AlertContext.updateProfileSuccess
-                    case .failure:
-                        alertItem = AlertContext.updateProfileFailure
+                    switch result {
+                        case .success(let record):
+                            existingProfileRecord = record
+                            let profile = DDGProfile(record: record)
+                            firstName = profile.firstName
+                            lastName = profile.lastName
+                            companyName = profile.companyName
+                            bio = profile.bio
+                            avatar = profile.avatarImage
+                        case .failure:
+                            alertItem = AlertContext.unableToGetProfile
+                    }
                 }
             }
         }
-    }
 
-    private func createProfileRecord() -> CKRecord {
-        let profileRecord = CKRecord(recordType: RecordType.profile)
-        profileRecord[DDGProfile.kFirstName] = firstName
-        profileRecord[DDGProfile.kLastName] = lastName
-        profileRecord[DDGProfile.kCompanyName] = companyName
-        profileRecord[DDGProfile.kBio] = bio
-        profileRecord[DDGProfile.kAvatar] = avatar.convertToCKAsset()
+        private func updateProfile() {
+            guard isValidProfile() else {
+                alertItem = AlertContext.invalidProfile
+                return
+            }
 
-        return profileRecord
-    }
+            guard let profileRecord = existingProfileRecord else {
+                alertItem = AlertContext.unableToGetProfile
+                return
+            }
 
-    private func showLoadingView() {
-        isLoading = true
-    }
+            profileRecord[DDGProfile.kFirstName] = firstName
+            profileRecord[DDGProfile.kLastName] = lastName
+            profileRecord[DDGProfile.kCompanyName] = companyName
+            profileRecord[DDGProfile.kBio] = bio
+            profileRecord[DDGProfile.kAvatar] = avatar.convertToCKAsset()
 
-    private func hideLoadingView() {
-        isLoading = false
+            showLoadingView()
+            CloudKitManager.shared.save(record: profileRecord) { result in
+                DispatchQueue.main.async { [self] in
+                    hideLoadingView()
+
+                    switch result {
+                        case .success:
+                            alertItem = AlertContext.updateProfileSuccess
+                        case .failure:
+                            alertItem = AlertContext.updateProfileFailure
+                    }
+                }
+            }
+        }
+
+        private func createProfileRecord() -> CKRecord {
+            let profileRecord = CKRecord(recordType: RecordType.profile)
+            profileRecord[DDGProfile.kFirstName] = firstName
+            profileRecord[DDGProfile.kLastName] = lastName
+            profileRecord[DDGProfile.kCompanyName] = companyName
+            profileRecord[DDGProfile.kBio] = bio
+            profileRecord[DDGProfile.kAvatar] = avatar.convertToCKAsset()
+
+            return profileRecord
+        }
+
+        private func showLoadingView() {
+            isLoading = true
+        }
+
+        private func hideLoadingView() {
+            isLoading = false
+        }
     }
 }
