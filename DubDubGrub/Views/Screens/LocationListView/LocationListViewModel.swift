@@ -9,20 +9,16 @@ import CloudKit
 import SwiftUI
 
 extension LocationListView {
+    @MainActor
     final class LocationListViewModel: ObservableObject {
         @Published var checkedInProfiles = [CKRecord.ID: [DDGProfile]]()
         @Published var alertItem: AlertItem?
 
-        func getCheckedInProfilesDictionary() {
-            CloudKitManager.shared.getCheckedInProfilesDictionary { result in
-                DispatchQueue.main.async { [self] in
-                    switch result {
-                        case .success(let checkedInProfiles):
-                            self.checkedInProfiles = checkedInProfiles
-                        case .failure:
-                            alertItem = AlertContext.unableToGetAllCheckedInProfiles
-                    }
-                }
+        func getCheckedInProfilesDictionary() async {
+            do {
+                checkedInProfiles = try await CloudKitManager.shared.getCheckedInProfilesDictionary()
+            } catch {
+                alertItem = AlertContext.unableToGetAllCheckedInProfiles
             }
         }
 

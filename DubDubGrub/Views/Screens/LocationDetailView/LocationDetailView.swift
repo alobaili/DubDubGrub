@@ -39,9 +39,9 @@ struct LocationDetailView: View {
                 .accessibilityAddTraits(.isModal)
             }
         }
-        .onAppear {
-            viewModel.getCheckedInProfiles()
-            viewModel.getCheckedInStatus()
+        .task {
+            await viewModel.getCheckedInProfiles()
+            await viewModel.getCheckedInStatus()
         }
         .sheet(isPresented: $viewModel.isShowingProfileSheet) {
             NavigationView {

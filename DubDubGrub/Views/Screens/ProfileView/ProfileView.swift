@@ -83,9 +83,9 @@ struct ProfileView: View {
                 Image(systemName: "keyboard.chevron.compact.down")
             }
         }
-        .onAppear {
-            viewModel.getProfile()
-            viewModel.getCheckedInStatus()
+        .task {
+            await viewModel.getProfile()
+            await viewModel.getCheckedInStatus()
         }
         .alert(item: $viewModel.alertItem) { $0.alert }
         .sheet(isPresented: $viewModel.isShowingPhotoPicker) {
