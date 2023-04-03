@@ -11,7 +11,7 @@ import SwiftUI
 struct LocationMapView: View {
     @EnvironmentObject private var locationManager: LocationManager
     @StateObject private var viewModel = LocationMapViewModel()
-    @Environment(\.sizeCategory) var sizeCategory
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -34,7 +34,7 @@ struct LocationMapView: View {
                     }
                 }
             }
-            .accentColor(.brandSecondry)
+            .tint(.brandSecondry)
             .ignoresSafeArea()
 
             LogoView(frameWidth: 125)
@@ -44,7 +44,7 @@ struct LocationMapView: View {
             NavigationView {
                 viewModel.createLocationDetailView(
                     for: locationManager.selectedLocation!,
-                    in: sizeCategory
+                    in: dynamicTypeSize
                 )
                 .toolbar {
                     Button("Dismiss") {
@@ -52,7 +52,6 @@ struct LocationMapView: View {
                     }
                 }
             }
-            .accentColor(.brandPrimary)
         }
         .alert(item: $viewModel.alertItem) { $0.alert }
         .onAppear {

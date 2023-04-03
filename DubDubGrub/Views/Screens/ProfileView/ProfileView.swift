@@ -171,10 +171,10 @@ struct BioTextEditor: View {
     var body: some View {
         TextEditor(text: text)
             .frame(height: 100)
-            .overlay(
+            .overlay {
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(.secondary, lineWidth: 1)
-            )
+            }
             .accessibilityLabel(Text("Bio"))
             .accessibilityHint(Text("This textfield has a 100 character limit."))
     }

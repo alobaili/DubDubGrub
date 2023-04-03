@@ -10,7 +10,7 @@ import SwiftUI
 struct LocationListView: View {
     @EnvironmentObject private var locationManager: LocationManager
     @StateObject private var viewModel = LocationListViewModel()
-    @Environment(\.sizeCategory) var sizeCategory
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
 
     var body: some View {
         NavigationView {
@@ -20,7 +20,7 @@ struct LocationListView: View {
                         destination:
                             viewModel.createLocationDetailView(
                                 for: location,
-                                in: sizeCategory
+                                in: dynamicTypeSize
                             )
                     ) {
                         LocationCell(
@@ -33,6 +33,7 @@ struct LocationListView: View {
                 }
             }
             .navigationTitle("Grub Spots")
+            .listStyle(.plain)
             .onAppear {
                 print("on appear")
                 viewModel.getCheckedInProfilesDictionary()

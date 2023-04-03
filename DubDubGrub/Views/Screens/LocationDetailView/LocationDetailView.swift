@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LocationDetailView: View {
     @ObservedObject var viewModel: LocationDetailViewModel
-    @Environment(\.sizeCategory) var sizeCategory
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
 
     var body: some View {
         ZStack {
@@ -52,7 +52,6 @@ struct LocationDetailView: View {
                         }
                     }
             }
-            .accentColor(.brandPrimary)
         }
         .alert(item: $viewModel.alertItem) { $0.alert }
         .navigationTitle(viewModel.location.name)
@@ -188,7 +187,7 @@ fileprivate struct GridHeaderTextView: View {
 
 fileprivate struct AvatarGridView: View {
     @ObservedObject var viewModel: LocationDetailViewModel
-    @Environment(\.sizeCategory) var sizeCategory
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
 
     var body: some View {
         ZStack {
@@ -196,11 +195,13 @@ fileprivate struct AvatarGridView: View {
                 GridEmptyStateTextView()
             } else {
                 ScrollView {
-                    LazyVGrid(columns: viewModel.determineColumns(for: sizeCategory)) {
+                    LazyVGrid(columns: viewModel.determineColumns(for: dynamicTypeSize)) {
                         ForEach(viewModel.checkedInProfiles) { profile in
                             FirstNameAvatarView(profile: profile)
                                 .onTapGesture {
-                                    viewModel.show(profile, in: sizeCategory)
+                                    withAnimation {
+                                        viewModel.show(profile, in: dynamicTypeSize)
+                                    }
                                 }
                         }
                     }
@@ -216,14 +217,14 @@ fileprivate struct AvatarGridView: View {
 
 
 fileprivate struct FirstNameAvatarView: View {
-    @Environment(\.sizeCategory) var sizeCategory
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
     var profile: DDGProfile
 
     var body: some View {
         VStack {
             AvatarView(
                 image: profile.avatarImage,
-                size: sizeCategory >= .accessibilityMedium ? 100 : 64
+                size: dynamicTypeSize >= .accessibility3 ? 100 : 64
             )
 
             Text(profile.firstName)
