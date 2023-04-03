@@ -25,6 +25,8 @@ struct LocationDetailView: View {
                 GridHeaderTextView(number: viewModel.checkedInProfiles.count)
 
                 AvatarGridView(viewModel: viewModel)
+
+                Spacer()
             }
 
             if viewModel.isShowingProfileModal {
