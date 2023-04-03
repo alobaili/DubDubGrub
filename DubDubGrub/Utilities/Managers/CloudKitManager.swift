@@ -49,14 +49,12 @@ final class CloudKitManager {
             query,
             inZoneWith: nil
         ) { records, error in
-            guard error == nil else {
+            guard let records, error == nil else {
                 completion(.failure(error!))
                 return
             }
 
-            guard let records else { return }
-
-            let locations = records.map { $0.convertToDDGLocation() }
+            let locations = records.map(DDGLocation.init)
 
             completion(.success(locations))
         }
@@ -79,7 +77,7 @@ final class CloudKitManager {
                 return
             }
 
-            let profiles = records.map { $0.convertToDDGProfile() }
+            let profiles = records.map(DDGProfile.init)
 
             completion(.success(profiles))
         }
@@ -97,7 +95,9 @@ final class CloudKitManager {
         operation.recordFetchedBlock = { record in
             let profile = DDGProfile(record: record)
 
-            guard let locationReference = profile.isCheckedIn else { return }
+            guard let locationReference = record[DDGProfile.kIsCheckedIn] as? CKRecord.Reference else {
+                return
+            }
 
             checkedInProfiles[locationReference.recordID, default: []].append(profile)
         }
@@ -108,9 +108,65 @@ final class CloudKitManager {
                 return
             }
 
-            // handle cursor later.
+            if let cursor {
+                self.continueWithCheckedInProfilesDictionary(
+                    cursor: cursor,
+                    dictionary: checkedInProfiles
+                ) { result in
+                    switch result {
+                        case .success(let profiles):
+                            completion(.success(profiles))
+                        case .failure(let error):
+                            completion(.failure(error))
+                    }
+                }
+            } else {
+                completion(.success(checkedInProfiles))
+            }
+        }
 
-            completion(.success(checkedInProfiles))
+        CKContainer.default().publicCloudDatabase.add(operation)
+    }
+
+    func continueWithCheckedInProfilesDictionary(
+        cursor: CKQueryOperation.Cursor,
+        dictionary: [CKRecord.ID: [DDGProfile]],
+        completion: @escaping (Result<[CKRecord.ID: [DDGProfile]], Error>) -> Void
+    ) {
+        var checkedInProfiles = dictionary
+        let operation = CKQueryOperation(cursor: cursor)
+
+        operation.recordFetchedBlock = { record in
+            let profile = DDGProfile(record: record)
+
+            guard let locationReference = record[DDGProfile.kIsCheckedIn] as? CKRecord.Reference else {
+                return
+            }
+
+            checkedInProfiles[locationReference.recordID, default: []].append(profile)
+        }
+
+        operation.queryCompletionBlock = { cursor, error in
+            guard error == nil else {
+                completion(.failure(error!))
+                return
+            }
+
+            if let cursor {
+                self.continueWithCheckedInProfilesDictionary(
+                    cursor: cursor,
+                    dictionary: checkedInProfiles
+                ) { result in
+                    switch result {
+                        case .success(let profiles):
+                            completion(.success(profiles))
+                        case .failure(let error):
+                            completion(.failure(error))
+                    }
+                }
+            } else {
+                completion(.success(checkedInProfiles))
+            }
         }
 
         CKContainer.default().publicCloudDatabase.add(operation)
