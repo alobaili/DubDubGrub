@@ -10,6 +10,11 @@ import CloudKit
 
 struct ProfileView: View {
     @StateObject private var viewModel = ProfileViewModel()
+    @FocusState private var focusedTextField: ProfileTextField?
+
+    enum ProfileTextField {
+        case firstName, lastName, companyName, bio
+    }
 
     var body: some View {
         ZStack {
@@ -22,15 +27,30 @@ struct ProfileView: View {
 
                     VStack(spacing: 1) {
                         TextField("First Name", text: $viewModel.firstName)
+                            .focused($focusedTextField, equals: .firstName)
                             .profileNameStyle()
                             .textContentType(.givenName)
+                            .onSubmit {
+                                focusedTextField = .lastName
+                            }
+                            .submitLabel(.next)
 
                         TextField("Last Name", text: $viewModel.lastName)
+                            .focused($focusedTextField, equals: .lastName)
                             .profileNameStyle()
                             .textContentType(.familyName)
+                            .onSubmit {
+                                focusedTextField = .companyName
+                            }
+                            .submitLabel(.next)
 
                         TextField("Company name", text: $viewModel.companyName)
+                            .focused($focusedTextField, equals: .companyName)
                             .textContentType(.organizationName)
+                            .onSubmit {
+                                focusedTextField = .bio
+                            }
+                            .submitLabel(.next)
                     }
                     .padding(.trailing, 16)
                 }
@@ -57,6 +77,7 @@ struct ProfileView: View {
                     }
 
                     BioTextEditor(text: $viewModel.bio)
+                        .focused($focusedTextField, equals: .bio)
                 }
                 .padding(.horizontal, 20)
 
@@ -69,6 +90,13 @@ struct ProfileView: View {
                 }
                 .padding(.bottom)
             }
+            .toolbar {
+                ToolbarItem(placement: .keyboard) {
+                    Button("Dismiss") {
+                        focusedTextField = nil
+                    }
+                }
+            }
 
             if viewModel.isLoading {
                 LoadingView()
@@ -76,13 +104,7 @@ struct ProfileView: View {
         }
         .navigationTitle("Profile")
         .navigationBarTitleDisplayMode(DeviceTypes.isiPhone8Standard ? .inline : .automatic)
-        .toolbar {
-            Button {
-                dismissKeyboard()
-            } label: {
-                Image(systemName: "keyboard.chevron.compact.down")
-            }
-        }
+        .ignoresSafeArea(.keyboard)
         .task {
             await viewModel.getProfile()
             await viewModel.getCheckedInStatus()
