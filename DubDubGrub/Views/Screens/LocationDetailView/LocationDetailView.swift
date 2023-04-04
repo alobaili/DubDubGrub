@@ -130,7 +130,7 @@ fileprivate struct ActionButtonHStack: View {
             }
             .accessibilityLabel(Text("Call location"))
 
-            if let _ = CloudKitManager.shared.profileRecordID {
+            if CloudKitManager.shared.profileRecordID != nil {
                 Button {
                     viewModel.updateCheckInStatus(
                         to: viewModel.isCheckedIn

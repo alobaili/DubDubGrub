@@ -55,7 +55,7 @@ extension ProfileView {
             do {
                 let record = try await CloudKitManager.shared.fetchRecord(with: profileRecordID)
 
-                if let _ = record[DDGProfile.kIsCheckedIn] as? CKRecord.Reference {
+                if record[DDGProfile.kIsCheckedIn] as? CKRecord.Reference != nil {
                     isCheckedIn = true
                 } else {
                     isCheckedIn = false

@@ -10,7 +10,6 @@ import CloudKit
 import SwiftUI
 
 extension LocationMapView {
-    @MainActor
     final class LocationMapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         @Published var checkedInProfiles = [CKRecord.ID: Int]()
         @Published var isShowingDetailView = false
@@ -50,6 +49,7 @@ extension LocationMapView {
             print("Did fail with error. \(error)")
         }
 
+        @MainActor
         func getLocations(for locationManager: LocationManager) async {
             do {
                 locationManager.locations = try await CloudKitManager.shared.getLocations()
@@ -58,6 +58,7 @@ extension LocationMapView {
             }
         }
 
+        @MainActor
         func getCheckedInCount() async {
             do {
                 checkedInProfiles = try await CloudKitManager.shared.getCheckedInProfilesCount()
@@ -66,6 +67,7 @@ extension LocationMapView {
             }
         }
 
+        @MainActor
         @ViewBuilder func createLocationDetailView(
             for location: DDGLocation,
             in dynamicTypeSize: DynamicTypeSize
