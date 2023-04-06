@@ -22,7 +22,7 @@ struct AppTabView: View {
                     Label("Locations", systemImage: "building")
                 }
 
-            NavigationView {
+            NavigationStack {
                 ProfileView()
             }
             .tabItem {

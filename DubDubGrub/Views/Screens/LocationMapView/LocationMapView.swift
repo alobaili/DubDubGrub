@@ -42,7 +42,7 @@ struct LocationMapView: View {
                 .shadow(radius: 10)
         }
         .sheet(isPresented: $viewModel.isShowingDetailView) {
-            NavigationView {
+            NavigationStack {
                 viewModel.createLocationDetailView(
                     for: locationManager.selectedLocation!,
                     in: dynamicTypeSize
