@@ -20,7 +20,6 @@ extension ProfileView {
         var companyName = ""
         var bio = ""
         var avatar = PlaceholderImage.avatar
-        var isShowingPhotoPicker = false
         var isLoading = false
         var isCheckedIn = false
         var alertItem: AlertItem?

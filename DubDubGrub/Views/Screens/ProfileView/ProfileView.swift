@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CloudKit
+import PhotosUI
 
 @MainActor
 struct ProfileView: View {
@@ -21,10 +22,7 @@ struct ProfileView: View {
         ZStack {
             VStack {
                 HStack(spacing: 16) {
-                    ProfileImageView(image: viewModel.avatar)
-                        .onTapGesture {
-                            viewModel.isShowingPhotoPicker = true
-                        }
+                    ProfileImageView(viewModel: viewModel)
 
                     VStack(spacing: 1) {
                         TextField("First Name", text: $viewModel.firstName)
@@ -111,9 +109,6 @@ struct ProfileView: View {
             await viewModel.getCheckedInStatus()
         }
         .alert(item: $viewModel.alertItem) { $0.alert }
-        .sheet(isPresented: $viewModel.isShowingPhotoPicker) {
-            PhotoPicker(image: $viewModel.avatar)
-        }
     }
 }
 
@@ -133,24 +128,38 @@ fileprivate struct NameBackgroundView: View {
 }
 
 fileprivate struct ProfileImageView: View {
-    var image: UIImage
+    var viewModel: ProfileView.ProfileViewModel
+    @State private var selectedImage: PhotosPickerItem?
 
     var body: some View {
-        ZStack {
-            AvatarView(image: image, size: 84)
+        ZStack(alignment: .bottom) {
+            AvatarView(image: viewModel.avatar, size: 84)
 
-            Image(systemName: "square.and.pencil")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 14, height: 14)
-                .foregroundColor(.white)
-                .offset(y: 30)
+            PhotosPicker(selection: $selectedImage, matching: .images) {
+                Image(systemName: "square.and.pencil")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 14, height: 14)
+                    .foregroundColor(.white)
+                    .padding(.bottom, 6)
+            }
         }
         .accessibilityElement(children: .ignore)
         .accessibilityAddTraits(.isButton)
         .accessibilityLabel(Text("Profile Photo"))
         .accessibilityHint(Text("Opens the iPhone's photo picker"))
         .padding(.leading, 12)
+        .onChange(of: selectedImage) { _, _ in
+            Task {
+                if
+                    let pickerItem = selectedImage,
+                    let data = try? await pickerItem.loadTransferable(type: Data.self),
+                    let image = UIImage(data: data)
+                {
+                    viewModel.avatar = image
+                }
+            }
+        }
     }
 }
 
