@@ -11,7 +11,7 @@ import SwiftUI
 
 struct LocationMapView: View {
     @EnvironmentObject private var locationManager: LocationManager
-    @StateObject private var viewModel = LocationMapViewModel()
+    @State private var viewModel = LocationMapViewModel()
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
 
     var body: some View {

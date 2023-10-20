@@ -13,17 +13,17 @@ enum CheckInStatus {
     case checkedIn, checkedOut
 }
 
-@MainActor
-final class LocationDetailViewModel: ObservableObject {
-    @Published var alertItem: AlertItem?
-    @Published var isShowingProfileModal = false
-    @Published var isShowingProfileSheet = false
-    @Published var checkedInProfiles = [DDGProfile]()
-    @Published var isCheckedIn = false
-    @Published var isLoading = false
+@MainActor @Observable
+final class LocationDetailViewModel {
+    var alertItem: AlertItem?
+    var isShowingProfileModal = false
+    var isShowingProfileSheet = false
+    var checkedInProfiles = [DDGProfile]()
+    var isCheckedIn = false
+    var isLoading = false
 
-    var location: DDGLocation
-    var selectedProfile: DDGProfile?
+    @ObservationIgnored var location: DDGLocation
+    @ObservationIgnored var selectedProfile: DDGProfile?
     var buttonColor: Color { isCheckedIn ? .grubRed : .brandPrimary }
     var buttonImageTitle: String { isCheckedIn ? "person.fill.xmark" : "person.fill.checkmark" }
     var buttonA11yLabel: String { isCheckedIn ? "Check out of location" : "Check into location" }

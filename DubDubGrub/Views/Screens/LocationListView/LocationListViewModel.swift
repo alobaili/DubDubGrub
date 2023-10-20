@@ -7,12 +7,13 @@
 
 import CloudKit
 import SwiftUI
+import Observation
 
 extension LocationListView {
-    @MainActor
-    final class LocationListViewModel: ObservableObject {
-        @Published var checkedInProfiles = [CKRecord.ID: [DDGProfile]]()
-        @Published var alertItem: AlertItem?
+    @MainActor @Observable
+    final class LocationListViewModel {
+        var checkedInProfiles = [CKRecord.ID: [DDGProfile]]()
+        var alertItem: AlertItem?
 
         func getCheckedInProfilesDictionary() async {
             do {

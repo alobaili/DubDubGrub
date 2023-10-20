@@ -13,24 +13,26 @@ enum ProfileContext {
 }
 
 extension ProfileView {
-    @MainActor
-    final class ProfileViewModel: ObservableObject {
-        @Published var firstName = ""
-        @Published var lastName = ""
-        @Published var companyName = ""
-        @Published var bio = ""
-        @Published var avatar = PlaceholderImage.avatar
-        @Published var isShowingPhotoPicker = false
-        @Published var isLoading = false
-        @Published var isCheckedIn = false
-        @Published var alertItem: AlertItem?
+    @MainActor @Observable
+    final class ProfileViewModel {
+        var firstName = ""
+        var lastName = ""
+        var companyName = ""
+        var bio = ""
+        var avatar = PlaceholderImage.avatar
+        var isShowingPhotoPicker = false
+        var isLoading = false
+        var isCheckedIn = false
+        var alertItem: AlertItem?
 
+        @ObservationIgnored
         private var existingProfileRecord: CKRecord? {
             didSet {
                 profileContext = .update
             }
         }
 
+        @ObservationIgnored
         var profileContext: ProfileContext = .create
         var buttonTitle: String { profileContext == .create ? "Create Profile" : "Update Profile" }
 
