@@ -22,8 +22,6 @@ struct XDismissButton: View {
     }
 }
 
-struct XDismissButton_Previews: PreviewProvider {
-    static var previews: some View {
-        XDismissButton()
-    }
+#Preview {
+    XDismissButton()
 }

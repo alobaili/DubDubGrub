@@ -43,8 +43,6 @@ struct DDGAnnotation: View {
     }
 }
 
-struct DDGAnnotation_Previews: PreviewProvider {
-    static var previews: some View {
-        DDGAnnotation(location: DDGLocation(record: MockData.location), number: 44)
-    }
+#Preview {
+    DDGAnnotation(location: DDGLocation(record: MockData.location), number: 44)
 }

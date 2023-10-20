@@ -54,10 +54,8 @@ struct OnboardView: View {
     }
 }
 
-struct OnboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        OnboardView()
-    }
+#Preview {
+    OnboardView()
 }
 
 fileprivate struct OnboardInfoView: View {

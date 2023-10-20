@@ -21,8 +21,16 @@ struct DDGButton: View {
     }
 }
 
-struct DDGButton_Previews: PreviewProvider {
-    static var previews: some View {
-        DDGButton(title: "Test Button")
-    }
+#Preview("Light Mode") {
+    DDGButton(title: "Test Button")
+}
+
+#Preview("Dark Mode") {
+    DDGButton(title: "Test Button")
+        .preferredColorScheme(.dark)
+}
+
+#Preview("Dark Lanscape", traits: .landscapeRight) {
+    DDGButton(title: "Test Button")
+        .preferredColorScheme(.dark)
 }

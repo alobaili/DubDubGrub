@@ -76,9 +76,7 @@ struct LocationMapView: View {
     }
 }
 
-struct LocationMapView_Previews: PreviewProvider {
-    static var previews: some View {
-        LocationMapView()
-            .environmentObject(LocationManager())
-    }
+#Preview {
+    LocationMapView()
+        .environmentObject(LocationManager())
 }

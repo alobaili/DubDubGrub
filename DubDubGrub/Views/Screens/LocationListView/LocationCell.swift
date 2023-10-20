@@ -49,20 +49,18 @@ struct LocationCell: View {
     }
 }
 
-struct LocationCell_Previews: PreviewProvider {
-    static var previews: some View {
-        LocationCell(
-            location: DDGLocation(record: MockData.location),
-            profiles: [
-                DDGProfile(record: MockData.profile),
-                DDGProfile(record: MockData.profile),
-                DDGProfile(record: MockData.profile),
-                DDGProfile(record: MockData.profile),
-                DDGProfile(record: MockData.profile),
-                DDGProfile(record: MockData.profile),
-            ]
-        )
-    }
+#Preview {
+    LocationCell(
+        location: DDGLocation(record: MockData.location),
+        profiles: [
+            DDGProfile(record: MockData.profile),
+            DDGProfile(record: MockData.profile),
+            DDGProfile(record: MockData.profile),
+            DDGProfile(record: MockData.profile),
+            DDGProfile(record: MockData.profile),
+            DDGProfile(record: MockData.profile),
+        ]
+    )
 }
 
 fileprivate struct AdditionalProfilesView: View {
